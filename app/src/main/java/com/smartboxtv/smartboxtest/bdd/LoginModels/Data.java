@@ -20,6 +20,13 @@ public class Data implements Serializable
     @Expose
     private User user;
 
+    public Data(String accessToken, String expiresIn, String tokenType, User user) {
+        this.accessToken = accessToken;
+        this.expiresIn = expiresIn;
+        this.tokenType = tokenType;
+        this.user = user;
+    }
+
     public String getAccessToken() {
         return accessToken;
     }

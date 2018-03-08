@@ -8,6 +8,10 @@ public class LoginResponse {
     @Expose
     private Data data;
 
+    public LoginResponse(Data data) {
+        this.data = data;
+    }
+
     public Data getData() {
         return data;
     }

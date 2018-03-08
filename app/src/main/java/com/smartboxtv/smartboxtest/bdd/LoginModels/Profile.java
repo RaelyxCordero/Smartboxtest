@@ -11,6 +11,10 @@ public class Profile implements Serializable
     @Expose
     private String language;
 
+    public Profile(String language) {
+        this.language = language;
+    }
+
     public String getLanguage() {
         return language;
     }

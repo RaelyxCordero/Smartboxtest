@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SmartboxTest</string>
+    <string name="app_name">SmartboxTVChallenge</string>
 
     <!-- TITLE DIALOGS -->
     <string name="error">Error</string>
@@ -10,8 +10,9 @@
     <string name="please_wait">Por favor espere</string>
     <string name="unauthorized">No autorizado</string>
     <string name="success">Exitoso</string>
-    <string name="question">¿Estas seguro?</string>
+    <string name="question">¿Estás seguro?</string>
     <string name="add_observation">Agregar observacion</string>
+    <string name="loading">Cargando</string>
 
     <!-- MESSAGES ERROR-->
     <string name="timeout">Hay problemas intentando conectarse a los servidores.\n\nPor favor, verifique que posee conexión a internet.</string>
@@ -28,6 +29,8 @@
     <string name="card_tv_estadio">Estadio:</string>
     <string name="card_tv_duracion">Duracion del partido:</string>
     <string name="finalizado">Finalizado</string>
-    <string name="hyden">&#160;-&#160;</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

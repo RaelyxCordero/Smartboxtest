@@ -17,6 +17,12 @@ public class LoginBody implements Serializable
     @Expose
     private App app;
 
+    public LoginBody(User user, Device device, App app) {
+        this.user = user;
+        this.device = device;
+        this.app = app;
+    }
+
     public User getUser() {
         return user;
     }

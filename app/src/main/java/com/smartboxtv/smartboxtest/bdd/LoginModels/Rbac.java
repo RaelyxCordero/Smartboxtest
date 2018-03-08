@@ -14,6 +14,11 @@ public class Rbac implements Serializable
     @Expose
     private String template;
 
+    public Rbac(String role, String template) {
+        this.role = role;
+        this.template = template;
+    }
+
     public String getRole() {
         return role;
     }

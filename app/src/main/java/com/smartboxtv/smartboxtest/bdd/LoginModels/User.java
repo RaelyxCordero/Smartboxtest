@@ -15,6 +15,10 @@ public class User implements Serializable {
     @Expose
     private Profile profile;
 
+    public User(Profile profile) {
+        this.profile = profile;
+    }
+
     public Profile getProfile() {
         return profile;
     }

@@ -22,6 +22,14 @@ import java.util.TimeZone;
 public class Utils {
     private static Gson mGsonBuilder;
 
+    /**
+     * Constants
+     */
+
+    public static final int LOGIN = 0;
+    public static final int EVENTS = 1;
+
+
     public static Gson getGsonBuilder() {
         if (mGsonBuilder == null) {
             return new GsonBuilder()
