@@ -14,7 +14,6 @@ public class Name implements Serializable
     @SerializedName("original")
     @Expose
     private String original;
-    private final static long serialVersionUID = 417654171144191591L;
 
     /**
      * No args constructor for use in serialization
@@ -50,4 +49,11 @@ public class Name implements Serializable
         this.original = original;
     }
 
+    @Override
+    public String toString() {
+        return "Name{" +
+                "es='" + es + '\'' +
+                ", original='" + original + '\'' +
+                '}';
+    }
 }

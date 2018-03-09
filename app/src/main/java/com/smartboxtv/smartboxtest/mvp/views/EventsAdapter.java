@@ -43,43 +43,59 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         RecyclerView.ViewHolder viewHolder = null;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
-        switch (viewType) {
-            case ITEM:
-                View viewItem = inflater.inflate(R.layout.card_event, parent, false);
-                viewHolder = new EventVH(viewItem);
-                break;
-            case LOADING:
-                View viewLoading = inflater.inflate(R.layout.card_progress, parent, false);
-                viewHolder = new LoadingVH(viewLoading);
-                break;
-        }
+        View viewItem = inflater.inflate(R.layout.card_event, parent, false);
+        viewHolder = new EventViewHolder(viewItem);
+
+//        switch (viewType) {
+//            case ITEM:
+//                View viewItem = inflater.inflate(R.layout.card_event, parent, false);
+//                viewHolder = new EventViewHolder(viewItem);
+//                break;
+//            case LOADING:
+//                View viewLoading = inflater.inflate(R.layout.card_progress, parent, false);
+//                viewHolder = new LoadingVH(viewLoading);
+//                break;
+//        }
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder mHolder, int position) {
-        if (getItemViewType(position) == ITEM) {
-            final EventVH holder = (EventVH) mHolder;
-            holder.cardView.setBackgroundColor(mContext.getResources().getColor(R.color.colorBackgroundCard));
-//            if (Utils.mod(position) == 0) {
-//                holder.cardView.setBackgroundColor(mContext.getResources().getColor(R.color.card_pair));
-//            } else
-//                holder.cardView.setBackgroundColor(mContext.getResources().getColor(R.color.card_odd));
+//        if (getItemViewType(position) == ITEM) {
+        Item item = listItem.get(position);
 
 
-            holder.ivFirstteam.setImageResource(Utils.getImageResource(listItem.get(position).getHomeTeam().getShortName()));
-            holder.ivSecondTeam.setImageResource(Utils.getImageResource(listItem.get(position).getAwayTeam().getShortName()));
-            holder.tvDate.setText(Utils.changeDate(listItem.get(position).getStartDate()));
-            holder.tvFirstteam.setText(listItem.get(position).getHomeTeam().getName());
-            holder.tvSecondTeam.setText(listItem.get(position).getAwayTeam().getName());
-            holder.tvFirstScore.setText(String.valueOf(listItem.get(position).getHomeScore()));
-            holder.tvSecondscore.setText(String.valueOf(listItem.get(position).getAwayScore()));
-            holder.tvPhase.setText(listItem.get(position).getMatchDay().getPhase().getOriginal());
-            holder.tvNameGroup.setText(listItem.get(position).getMatchDay().getNameMatchDay().getOriginal());
-            holder.tvStatus.setText(listItem.get(position).getEventStatus().getName().getEs());
-            holder.tvDuration.setText(listItem.get(position).getMatchTime() / 60 + " Minutos");
-            holder.tvEstadium.setText(listItem.get(position).getLocation().getOriginal());
-        }
+        final EventViewHolder holder = (EventViewHolder) mHolder;
+
+        if (!item.getHomeTeam().getShortName().equals(""))
+            holder.ivFirstteam.setImageResource(Utils.getImageResource(item.getHomeTeam().getShortName()));
+
+        if (!item.getAwayTeam().getShortName().equals(""))
+            holder.ivSecondTeam.setImageResource(Utils.getImageResource(item.getAwayTeam().getShortName()));
+
+        if (!item.getHomeTeam().getName().equals(""))
+            holder.tvFirstteam.setText(item.getHomeTeam().getName());
+
+        if (!item.getAwayTeam().getName().equals(""))
+            holder.tvSecondTeam.setText(item.getAwayTeam().getName());
+
+        if (!item.getMatchDay().getPhase().getOriginal().equals(""))
+            holder.tvPhase.setText(item.getMatchDay().getPhase().getOriginal());
+
+        if (item.getMatchDay().getNameMatchDay() != null)
+            holder.tvNameGroup.setText(item.getMatchDay().getNameMatchDay().getOriginal());
+
+        if (!item.getEventStatus().getName().getEs().equals(""))
+            holder.tvStatus.setText(item.getEventStatus().getName().getEs());
+
+        if (!item.getLocation().getOriginal().equals(""))
+            holder.tvEstadium.setText(item.getLocation().getOriginal());
+
+        holder.tvFirstScore.setText(String.valueOf(item.getHomeScore()));
+        holder.tvSecondscore.setText(String.valueOf(item.getAwayScore()));
+        holder.tvDuration.setText(String.valueOf(item.getMatchTime() / 60 + " Minutos"));
+        holder.tvDate.setText(Utils.changeDate(item.getStartDate()));
+//        }
 
     }
 
@@ -127,52 +143,7 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return listItem.get(position);
     }
 
-    static class EventVH extends RecyclerView.ViewHolder implements View.OnClickListener {
-        @BindView(R.id.tvDate)
-        TextView tvDate;
-        @BindView(R.id.tvFirstteam)
-        TextView tvFirstteam;
-        @BindView(R.id.ivFirstteam)
-        ImageView ivFirstteam;
-        @BindView(R.id.tvFirstScore)
-        TextView tvFirstScore;
-        @BindView(R.id.tvSecondscore)
-        TextView tvSecondscore;
-        @BindView(R.id.ivSecondTeam)
-        ImageView ivSecondTeam;
-        @BindView(R.id.tvSecondTeam)
-        TextView tvSecondTeam;
-        @BindView(R.id.tvPhase)
-        TextView tvPhase;
-        @BindView(R.id.tvNameGroup)
-        TextView tvNameGroup;
-        @BindView(R.id.tvStatus)
-        TextView tvStatus;
-        @BindView(R.id.tvDuration)
-        TextView tvDuration;
-        @BindView(R.id.tvEstadium)
-        TextView tvEstadium;
-        @BindView(R.id.containerDetail)
-        LinearLayout containerDetail;
-        @BindView(R.id.cardView)
-        CardView cardView;
 
-        EventVH(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View view) {
-            if (containerDetail.getVisibility() == View.GONE) {
-                containerDetail.setVisibility(View.VISIBLE);
-                TransitionManager.beginDelayedTransition(cardView, new AutoTransition());
-            } else {
-                containerDetail.setVisibility(View.GONE);
-            }
-        }
-    }
 
 
     private class LoadingVH extends RecyclerView.ViewHolder {

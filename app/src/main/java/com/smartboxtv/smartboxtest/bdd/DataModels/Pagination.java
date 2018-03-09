@@ -32,26 +32,11 @@ public class Pagination implements Serializable
     @SerializedName("totalItems")
     @Expose
     private long totalItems;
-    private final static long serialVersionUID = 2448290062050790830L;
 
-    /**
-     * No args constructor for use in serialization
-     * 
-     */
     public Pagination() {
     }
 
-    /**
-     * 
-     * @param last
-     * @param items
-     * @param page
-     * @param pages
-     * @param next
-     * @param totalItems
-     * @param offset
-     * @param first
-     */
+
     public Pagination(long page, long first, long items, long last, long next, long pages, long offset, long totalItems) {
         super();
         this.page = page;

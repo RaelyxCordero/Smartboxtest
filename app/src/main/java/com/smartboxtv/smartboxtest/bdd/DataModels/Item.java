@@ -77,7 +77,6 @@ public class Item implements Serializable
     @SerializedName("_model")
     @Expose
     private String model;
-    private final static long serialVersionUID = 4859372251343596034L;
 
     /**
      * No args constructor for use in serialization
@@ -86,32 +85,6 @@ public class Item implements Serializable
     public Item() {
     }
 
-    /**
-     * 
-     * @param startDate
-     * @param model
-     * @param cellType
-     * @param awayTeam
-     * @param homeScore
-     * @param belong
-     * @param location
-     * @param homePenalties
-     * @param children
-     * @param externalProvider
-     * @param statusCategory
-     * @param endDate
-     * @param statusDate
-     * @param type
-     * @param matchTime
-     * @param externalId
-     * @param id
-     * @param awayPenalties
-     * @param createDate
-     * @param matchDay
-     * @param eventStatus
-     * @param homeTeam
-     * @param awayScore
-     */
     public Item(String id, Belong belong, String externalProvider, String externalId, MatchDay matchDay, EventStatus eventStatus, String statusCategory, Location location, String startDate, long cellType, String type, HomeTeam homeTeam, AwayTeam awayTeam, long homeScore, long awayScore, long matchTime, Object homePenalties, Object awayPenalties, String endDate, String statusDate, String createDate, Children children, String model) {
         super();
         this.id = id;
@@ -323,4 +296,32 @@ public class Item implements Serializable
         this.model = model;
     }
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id='" + id + '\'' +
+                ", belong=" + belong +
+                ", externalProvider='" + externalProvider + '\'' +
+                ", externalId='" + externalId + '\'' +
+                ", matchDay=" + matchDay +
+                ", eventStatus=" + eventStatus +
+                ", statusCategory='" + statusCategory + '\'' +
+                ", location=" + location +
+                ", startDate='" + startDate + '\'' +
+                ", cellType=" + cellType +
+                ", type='" + type + '\'' +
+                ", homeTeam=" + homeTeam +
+                ", awayTeam=" + awayTeam +
+                ", homeScore=" + homeScore +
+                ", awayScore=" + awayScore +
+                ", matchTime=" + matchTime +
+                ", homePenalties=" + homePenalties +
+                ", awayPenalties=" + awayPenalties +
+                ", endDate='" + endDate + '\'' +
+                ", statusDate='" + statusDate + '\'' +
+                ", createDate='" + createDate + '\'' +
+                ", children=" + children +
+                ", model='" + model + '\'' +
+                '}';
+    }
 }

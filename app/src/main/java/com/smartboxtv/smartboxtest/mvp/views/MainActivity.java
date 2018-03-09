@@ -7,12 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
 
 import com.smartboxtv.smartboxtest.R;
-import com.smartboxtv.smartboxtest.bdd.DataModels.Data;
+import com.smartboxtv.smartboxtest.bdd.DataModels.EventResponse;
 import com.smartboxtv.smartboxtest.mvp.presenters.EventsPresenter;
 import com.smartboxtv.smartboxtest.utils.MessageEventType;
 import com.smartboxtv.smartboxtest.utils.PreferencesManager;
 import com.smartboxtv.smartboxtest.utils.Utils;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        EventBus.getDefault().register(this);
 
         fm = getSupportFragmentManager();
         mPreferences = PreferencesManager.getInstance(this);
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         replaceFragment(Utils.LOGIN, null);
     }
 
-    public void replaceFragment(int frag, Data data) {
+    public void replaceFragment(int frag, EventResponse data) {
         Fragment fragment = null;
         switch (frag) {
             case Utils.LOGIN:
@@ -66,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (type) {
             case MessageEventType.HEY_VIEW_LAUNCH_EVENTS:
-                Data data = (Data) args[1];
+                EventResponse data = (EventResponse) args[1];
                 replaceFragment(Utils.EVENTS, data);
                 break;
 

@@ -3,7 +3,7 @@ package com.smartboxtv.smartboxtest.mvp.models;
 import android.content.Context;
 import android.util.Log;
 
-import com.smartboxtv.smartboxtest.bdd.DataModels.Data;
+import com.smartboxtv.smartboxtest.bdd.DataModels.EventResponse;
 import com.smartboxtv.smartboxtest.utils.MessageEventType;
 import com.smartboxtv.smartboxtest.utils.PreferencesManager;
 import com.smartboxtv.smartboxtest.webService.ServiceController;
@@ -25,14 +25,14 @@ public class EventModel {
 
     public EventModel(Context context) {
         this.context = context;
-        EventBus.getDefault().register(context);
+        EventBus.getDefault().register(this);
     }
 
     public void getEvents(int page) {
         ServiceController.getEvents(PreferencesManager.getInstance(context).getToken(),
-                page).enqueue(new Callback<Data>() {
+                page).enqueue(new Callback<EventResponse>() {
             @Override
-            public void onResponse(Call<Data> call, Response<Data> response) {
+            public void onResponse(Call<EventResponse> call, Response<EventResponse> response) {
                 if (response.isSuccessful())
                     EventBus.getDefault().post(new Object[]{MessageEventType.HEY_PRESENTER_API_GET_EVENTS_SUCCESS, response.body()});
                 else {
@@ -42,7 +42,7 @@ public class EventModel {
             }
 
             @Override
-            public void onFailure(Call<Data> call, Throwable t) {
+            public void onFailure(Call<EventResponse> call, Throwable t) {
                 EventBus.getDefault().post(new Object[]{MessageEventType.HEY_PRESENTER_API_GET_EVENTS_ERROR, 500});
                 Log.e(TAG, t.getMessage());
             }

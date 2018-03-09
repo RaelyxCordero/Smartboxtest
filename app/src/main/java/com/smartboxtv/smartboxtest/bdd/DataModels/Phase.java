@@ -11,7 +11,6 @@ public class Phase implements Serializable
     @SerializedName("original")
     @Expose
     private String original;
-    private final static long serialVersionUID = 1777112478495742380L;
 
     /**
      * No args constructor for use in serialization
@@ -20,10 +19,6 @@ public class Phase implements Serializable
     public Phase() {
     }
 
-    /**
-     * 
-     * @param original
-     */
     public Phase(String original) {
         super();
         this.original = original;
@@ -37,4 +32,10 @@ public class Phase implements Serializable
         this.original = original;
     }
 
+    @Override
+    public String toString() {
+        return "Phase{" +
+                "original='" + original + '\'' +
+                '}';
+    }
 }

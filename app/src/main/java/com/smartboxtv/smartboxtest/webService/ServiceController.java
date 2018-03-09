@@ -3,9 +3,8 @@ package com.smartboxtv.smartboxtest.webService;
 import android.content.Context;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 import com.smartboxtv.smartboxtest.R;
-import com.smartboxtv.smartboxtest.bdd.DataModels.Data;
+import com.smartboxtv.smartboxtest.bdd.DataModels.EventResponse;
 import com.smartboxtv.smartboxtest.bdd.LoginModels.LoginBody;
 import com.smartboxtv.smartboxtest.bdd.LoginModels.LoginResponse;
 import com.smartboxtv.smartboxtest.utils.CustomMessage;
@@ -16,6 +15,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
@@ -153,12 +153,16 @@ public class ServiceController {
             mConverterFactory = GsonConverterFactory.create(Utils.getGsonBuilder());
         }
 
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+
         String clientKey = String.valueOf(timeout);
         Retrofit retrofitCustomTimeout = retrofitClients.get(clientKey);
 
         if (retrofitCustomTimeout == null) {
             final OkHttpClient okHttpClient = new OkHttpClient.Builder()
                     .readTimeout(timeout, TimeUnit.SECONDS)
+                    .addInterceptor(logging)
                     .connectTimeout(timeout, TimeUnit.SECONDS)
                     .build();
 
@@ -185,7 +189,7 @@ public class ServiceController {
         return api.postLogin("Basic "+BASIC, requestLogin);
     }
 
-    public static Call<Data> getEvents(String token, int page) {
+    public static Call<EventResponse> getEvents(String token, int page) {
         ApiInterface api = buildAdapterCustomTimeOut(15).create(ApiInterface.class);
         return api.getEvents("Bearer "+token, page);
     }

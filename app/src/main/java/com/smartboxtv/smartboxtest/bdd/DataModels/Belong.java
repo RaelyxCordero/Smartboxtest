@@ -18,7 +18,6 @@ public class Belong implements Serializable
     @SerializedName("Tournament")
     @Expose
     private List<String> tournament = null;
-    private final static long serialVersionUID = 9115548873330498779L;
 
     /**
      * No args constructor for use in serialization
@@ -64,4 +63,12 @@ public class Belong implements Serializable
         this.tournament = tournament;
     }
 
+    @Override
+    public String toString() {
+        return "Belong{" +
+                "client='" + client + '\'' +
+                ", accessGroup=" + accessGroup +
+                ", tournament=" + tournament +
+                '}';
+    }
 }

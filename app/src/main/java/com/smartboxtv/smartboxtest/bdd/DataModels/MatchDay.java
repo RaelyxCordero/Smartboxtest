@@ -14,13 +14,12 @@ public class MatchDay implements Serializable
     @SerializedName("end")
     @Expose
     private String end;
-    @SerializedName("nameMatchDay")
+    @SerializedName("name")
     @Expose
     private NameMatchDay nameMatchDay;
     @SerializedName("phase")
     @Expose
     private Phase phase;
-    private final static long serialVersionUID = -2342850829805223435L;
 
     /**
      * No args constructor for use in serialization
@@ -76,4 +75,13 @@ public class MatchDay implements Serializable
         this.phase = phase;
     }
 
+    @Override
+    public String toString() {
+        return "MatchDay{" +
+                "start='" + start + '\'' +
+                ", end='" + end + '\'' +
+                ", nameMatchDay=" + nameMatchDay +
+                ", phase=" + phase +
+                '}';
+    }
 }

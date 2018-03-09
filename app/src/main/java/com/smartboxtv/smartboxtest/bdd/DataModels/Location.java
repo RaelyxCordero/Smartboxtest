@@ -11,7 +11,6 @@ public class Location implements Serializable
     @SerializedName("original")
     @Expose
     private String original;
-    private final static long serialVersionUID = 2257749307730446571L;
 
     /**
      * No args constructor for use in serialization
@@ -37,4 +36,10 @@ public class Location implements Serializable
         this.original = original;
     }
 
+    @Override
+    public String toString() {
+        return "Location{" +
+                "original='" + original + '\'' +
+                '}';
+    }
 }

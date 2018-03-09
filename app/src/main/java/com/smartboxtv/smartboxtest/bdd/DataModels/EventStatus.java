@@ -17,7 +17,6 @@ public class EventStatus implements Serializable
     @SerializedName("category")
     @Expose
     private String category;
-    private final static long serialVersionUID = 3092885998299906340L;
 
     /**
      * No args constructor for use in serialization
@@ -63,4 +62,12 @@ public class EventStatus implements Serializable
         this.category = category;
     }
 
+    @Override
+    public String toString() {
+        return "EventStatus{" +
+                "id='" + id + '\'' +
+                ", name=" + name +
+                ", category='" + category + '\'' +
+                '}';
+    }
 }

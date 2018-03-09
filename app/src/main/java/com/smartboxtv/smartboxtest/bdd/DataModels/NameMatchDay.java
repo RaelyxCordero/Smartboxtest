@@ -11,7 +11,6 @@ public class NameMatchDay implements Serializable
     @SerializedName("original")
     @Expose
     private String original;
-    private final static long serialVersionUID = -8629464296397260771L;
 
     /**
      * No args constructor for use in serialization
@@ -37,4 +36,10 @@ public class NameMatchDay implements Serializable
         this.original = original;
     }
 
+    @Override
+    public String toString() {
+        return "NameMatchDay{" +
+                "original='" + original + '\'' +
+                '}';
+    }
 }

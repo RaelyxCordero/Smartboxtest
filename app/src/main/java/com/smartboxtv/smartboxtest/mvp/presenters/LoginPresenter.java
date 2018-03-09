@@ -23,7 +23,7 @@ public class LoginPresenter {
         this.context = context;
         loginModel = new LoginModel(context);
         eventModel = new EventModel(context);
-        EventBus.getDefault().register(context);
+        EventBus.getDefault().register(this);
     }
 
     @Subscribe

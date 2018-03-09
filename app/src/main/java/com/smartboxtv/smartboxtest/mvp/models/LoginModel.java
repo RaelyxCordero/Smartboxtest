@@ -37,7 +37,7 @@ public class LoginModel {
 
     public LoginModel(Context context) {
         this.context = context;
-        EventBus.getDefault().register(context);
+        EventBus.getDefault().register(this);
     }
 
     private void postLogin() {
@@ -70,6 +70,7 @@ public class LoginModel {
                 if (response.isSuccessful()) {
                     String token = response.body().getDataLogin().getAccessToken();
                     PreferencesManager.getInstance(context).setToken(token);
+                    Log.e(TAG, token);
                     EventBus.getDefault().post(new Object[]{MessageEventType.HEY_PRESENTER_API_LOGIN_SUCCESS, response.code()});
                 }else {
                     EventBus.getDefault().post(new Object[]{MessageEventType.HEY_PRESENTER_API_LOGIN_ERROR, response.code()});

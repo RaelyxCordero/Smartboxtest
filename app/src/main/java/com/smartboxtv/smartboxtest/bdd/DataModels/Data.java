@@ -2,6 +2,7 @@
 package com.smartboxtv.smartboxtest.bdd.DataModels;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -11,14 +12,13 @@ public class Data implements Serializable
 
     @SerializedName("sections")
     @Expose
-    private List<Section> sections = null;
+    private ArrayList<Section> sections = new ArrayList<>();
     @SerializedName("items")
     @Expose
-    private List<Item> items = null;
+    private ArrayList<Item> items = new ArrayList<>();
     @SerializedName("pagination")
     @Expose
     private Pagination pagination;
-    private final static long serialVersionUID = -7956161448471880463L;
 
     /**
      * No args constructor for use in serialization
@@ -33,26 +33,26 @@ public class Data implements Serializable
      * @param items
      * @param pagination
      */
-    public Data(List<Section> sections, List<Item> items, Pagination pagination) {
+    public Data(ArrayList<Section> sections, ArrayList<Item> items, Pagination pagination) {
         super();
         this.sections = sections;
         this.items = items;
         this.pagination = pagination;
     }
 
-    public List<Section> getSections() {
+    public ArrayList<Section> getSections() {
         return sections;
     }
 
-    public void setSections(List<Section> sections) {
+    public void setSections(ArrayList<Section> sections) {
         this.sections = sections;
     }
 
-    public List<Item> getItems() {
+    public ArrayList<Item> getItems() {
         return items;
     }
 
-    public void setItems(List<Item> items) {
+    public void setItems(ArrayList<Item> items) {
         this.items = items;
     }
 
@@ -64,4 +64,12 @@ public class Data implements Serializable
         this.pagination = pagination;
     }
 
+    @Override
+    public String toString() {
+        return "Data{" +
+                "sections=" + sections +
+                ", items=" + items +
+                ", pagination=" + pagination +
+                '}';
+    }
 }

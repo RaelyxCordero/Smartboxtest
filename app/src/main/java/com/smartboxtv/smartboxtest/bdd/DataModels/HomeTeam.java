@@ -17,7 +17,6 @@ public class HomeTeam implements Serializable
     @SerializedName("shortName")
     @Expose
     private String shortName;
-    private final static long serialVersionUID = -1219186537482950277L;
 
     /**
      * No args constructor for use in serialization
@@ -63,4 +62,12 @@ public class HomeTeam implements Serializable
         this.shortName = shortName;
     }
 
+    @Override
+    public String toString() {
+        return "HomeTeam{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", shortName='" + shortName + '\'' +
+                '}';
+    }
 }

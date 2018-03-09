@@ -17,7 +17,6 @@ public class AwayTeam implements Serializable
     @SerializedName("shortName")
     @Expose
     private String shortName;
-    private final static long serialVersionUID = 4407841754124504368L;
 
     /**
      * No args constructor for use in serialization
@@ -63,4 +62,13 @@ public class AwayTeam implements Serializable
         this.shortName = shortName;
     }
 
+
+    @Override
+    public String toString() {
+        return "AwayTeam{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", shortName='" + shortName + '\'' +
+                '}';
+    }
 }

@@ -17,7 +17,6 @@ public class Section implements Serializable
     @SerializedName("title")
     @Expose
     private Title title;
-    private final static long serialVersionUID = -1355842525567369871L;
 
     /**
      * No args constructor for use in serialization
@@ -63,4 +62,12 @@ public class Section implements Serializable
         this.title = title;
     }
 
+    @Override
+    public String toString() {
+        return "Section{" +
+                "index=" + index +
+                ", id='" + id + '\'' +
+                ", title=" + title +
+                '}';
+    }
 }

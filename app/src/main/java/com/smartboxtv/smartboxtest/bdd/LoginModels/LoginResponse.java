@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class LoginResponse {
-    @SerializedName("dataLogin")
+    @SerializedName("data")
     @Expose
     private DataLogin dataLogin;
 

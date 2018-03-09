@@ -15,7 +15,6 @@ public class Children implements Serializable
     @SerializedName("Formation")
     @Expose
     private List<String> formation = null;
-    private final static long serialVersionUID = -3949768560854931500L;
 
     /**
      * No args constructor for use in serialization
@@ -51,4 +50,11 @@ public class Children implements Serializable
         this.formation = formation;
     }
 
+    @Override
+    public String toString() {
+        return "Children{" +
+                "timeLine=" + timeLine +
+                ", formation=" + formation +
+                '}';
+    }
 }

@@ -2,12 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorBackgroundCard"
     tools:context="com.smartboxtv.smartboxtest.mvp.views.ListFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/card_event"/>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
