@@ -5,6 +5,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.provider.Settings;
+import android.util.Log;
 
 import com.smartboxtv.smartboxtest.bdd.LoginModels.App;
 import com.smartboxtv.smartboxtest.bdd.LoginModels.Device;
@@ -12,7 +13,7 @@ import com.smartboxtv.smartboxtest.bdd.LoginModels.LoginBody;
 import com.smartboxtv.smartboxtest.bdd.LoginModels.LoginResponse;
 import com.smartboxtv.smartboxtest.bdd.LoginModels.Profile;
 import com.smartboxtv.smartboxtest.bdd.LoginModels.User;
-import com.smartboxtv.smartboxtest.utils.EventType;
+import com.smartboxtv.smartboxtest.utils.MessageEventType;
 import com.smartboxtv.smartboxtest.utils.PreferencesManager;
 import com.smartboxtv.smartboxtest.utils.Utils;
 import com.smartboxtv.smartboxtest.webService.ServiceController;
@@ -31,6 +32,7 @@ import retrofit2.Response;
  */
 
 public class LoginModel {
+    public static final String TAG = LoginModel.class.getSimpleName();
     Context context;
 
     public LoginModel(Context context) {
@@ -66,16 +68,19 @@ public class LoginModel {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
-                    String token = response.body().getData().getAccessToken();
+                    String token = response.body().getDataLogin().getAccessToken();
                     PreferencesManager.getInstance(context).setToken(token);
-                    EventBus.getDefault().post(new Object[]{EventType.SUCCESS_API, response.code()});
-                }else
-                    EventBus.getDefault().post(new Object[]{EventType.ERROR_API, response.code()});
+                    EventBus.getDefault().post(new Object[]{MessageEventType.HEY_PRESENTER_API_LOGIN_SUCCESS, response.code()});
+                }else {
+                    EventBus.getDefault().post(new Object[]{MessageEventType.HEY_PRESENTER_API_LOGIN_ERROR, response.code()});
+                    Log.e(TAG, response.message());
+                }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                EventBus.getDefault().post(new Object[]{EventType.ERROR_API, 500});
+                EventBus.getDefault().post(new Object[]{MessageEventType.HEY_PRESENTER_API_LOGIN_ERROR, 500});
+                Log.e(TAG, t.getMessage());
             }
         });
 
@@ -88,7 +93,7 @@ public class LoginModel {
         int type = (int) args[0];
 
         switch (type) {
-            case EventType.POST_LOGIN:
+            case MessageEventType.HEY_MODEL_POST_LOGIN:
                 postLogin();
                 break;
         }

@@ -3,20 +3,16 @@ package com.smartboxtv.smartboxtest.mvp.views;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.FrameLayout;
 
 import com.smartboxtv.smartboxtest.R;
+import com.smartboxtv.smartboxtest.bdd.DataModels.Data;
 import com.smartboxtv.smartboxtest.mvp.presenters.EventsPresenter;
-import com.smartboxtv.smartboxtest.mvp.presenters.LoginPresenter;
-import com.smartboxtv.smartboxtest.utils.EventType;
+import com.smartboxtv.smartboxtest.utils.MessageEventType;
 import com.smartboxtv.smartboxtest.utils.PreferencesManager;
 import com.smartboxtv.smartboxtest.utils.Utils;
-import com.smartboxtv.smartboxtest.webService.ServiceController;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
@@ -26,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public final static String TAG = MainActivity.class.getSimpleName();
     @BindView(R.id.container)
     FrameLayout fragmentsContainer;
-
+    EventsPresenter eventsPresenter;
 
     private PreferencesManager mPreferences;
     private static FragmentManager fm;
@@ -39,14 +35,12 @@ public class MainActivity extends AppCompatActivity {
 
         fm = getSupportFragmentManager();
         mPreferences = PreferencesManager.getInstance(this);
+        eventsPresenter = new EventsPresenter(this);
 
-        if (mPreferences.getToken().isEmpty())
-            replaceFragment(Utils.LOGIN);
-        else
-            replaceFragment(Utils.EVENTS);
+        replaceFragment(Utils.LOGIN, null);
     }
 
-    public void replaceFragment(int frag) {
+    public void replaceFragment(int frag, Data data) {
         Fragment fragment = null;
         switch (frag) {
             case Utils.LOGIN:
@@ -56,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 return;
 
             case Utils.EVENTS:
-                fragment = ListFragment.newInstance();
+                fragment = ListFragment.newInstance(data);
                 fm.beginTransaction().replace(R.id.container, fragment, ListFragment.TAG)
                         .commit();
                 break;
@@ -71,8 +65,9 @@ public class MainActivity extends AppCompatActivity {
         int type = (int) args[0];
 
         switch (type) {
-            case EventType.LAUNCH_EVENTS:
-                replaceFragment(Utils.EVENTS);
+            case MessageEventType.HEY_VIEW_LAUNCH_EVENTS:
+                Data data = (Data) args[1];
+                replaceFragment(Utils.EVENTS, data);
                 break;
 
 

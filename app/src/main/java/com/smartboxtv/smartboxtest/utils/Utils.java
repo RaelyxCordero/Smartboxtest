@@ -40,36 +40,36 @@ public class Utils {
         return mGsonBuilder;
     }
 
-//    public static int getImageResource(String shortName) {
-//        int id = 0;
-//        switch (shortName) {
-//            case "ALE":
-//                id = R.drawable.ic_ger;
-//                break;
-//            case "CMR":
-//                id = R.drawable.ic_cmr;
-//                break;
-//            case "CHI":
-//                id = R.drawable.ic_chi;
-//                break;
-//            case "AUS":
-//                id = R.drawable.ic_aus;
-//                break;
-//            case "POR":
-//                id = R.drawable.ic_por;
-//                break;
-//            case "MEX":
-//                id = R.drawable.ic_mex;
-//                break;
-//            case "NZL":
-//                id = R.drawable.ic_nzl;
-//                break;
-//            case "RUS":
-//                id = R.drawable.ic_rus;
-//                break;
-//        }
-//        return id;
-//    }
+    public static int getImageResource(String shortName) {
+        int id = 0;
+        switch (shortName) {
+            case "ALE":
+                id = R.drawable.ic_ger;
+                break;
+            case "CMR":
+                id = R.drawable.ic_cmr;
+                break;
+            case "CHI":
+                id = R.drawable.ic_chi;
+                break;
+            case "AUS":
+                id = R.drawable.ic_aus;
+                break;
+            case "POR":
+                id = R.drawable.ic_por;
+                break;
+            case "MEX":
+                id = R.drawable.ic_mex;
+                break;
+            case "NZL":
+                id = R.drawable.ic_nzl;
+                break;
+            case "RUS":
+                id = R.drawable.ic_rus;
+                break;
+        }
+        return id;
+    }
 
     public static String
     changeDate(String dateModel){

@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.smartboxtv.smartboxtest.mvp.models.EventModel;
 import com.smartboxtv.smartboxtest.mvp.models.LoginModel;
-import com.smartboxtv.smartboxtest.utils.EventType;
+import com.smartboxtv.smartboxtest.utils.MessageEventType;
 import com.smartboxtv.smartboxtest.webService.ServiceController;
 
 import org.greenrobot.eventbus.EventBus;
@@ -33,15 +33,15 @@ public class LoginPresenter {
         int type = (int) args[0];
 
         switch (type) {
-            case EventType.LOGIN:
-                EventBus.getDefault().post(new Object[]{EventType.POST_LOGIN});
+            case MessageEventType.HEY_PRESENTER_DO_LOGIN:
+                EventBus.getDefault().post(new Object[]{MessageEventType.HEY_MODEL_POST_LOGIN});
                 break;
-            case EventType.ERROR_API:
+            case MessageEventType.HEY_PRESENTER_API_LOGIN_ERROR:
                 int errorCode = (int) args[1];
                 ServiceController.handlerRequestError(context, errorCode);
                 break;
-            case EventType.SUCCESS_API:
-                EventBus.getDefault().post(new Object[]{EventType.LAUNCH_EVENTS});
+            case MessageEventType.HEY_PRESENTER_API_LOGIN_SUCCESS:
+                EventBus.getDefault().post(new Object[]{MessageEventType.HEY_PRESENTER_GET_EVENTS});
                 break;
 
 

@@ -4,19 +4,19 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class LoginResponse {
-    @SerializedName("data")
+    @SerializedName("dataLogin")
     @Expose
-    private Data data;
+    private DataLogin dataLogin;
 
-    public LoginResponse(Data data) {
-        this.data = data;
+    public LoginResponse(DataLogin dataLogin) {
+        this.dataLogin = dataLogin;
     }
 
-    public Data getData() {
-        return data;
+    public DataLogin getDataLogin() {
+        return dataLogin;
     }
 
-    public void setData(Data data) {
-        this.data = data;
+    public void setDataLogin(DataLogin dataLogin) {
+        this.dataLogin = dataLogin;
     }
 }

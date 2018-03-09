@@ -4,7 +4,7 @@ import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Data implements Serializable
+public class DataLogin implements Serializable
 {
 
     @SerializedName("accessToken")
@@ -20,7 +20,7 @@ public class Data implements Serializable
     @Expose
     private User user;
 
-    public Data(String accessToken, String expiresIn, String tokenType, User user) {
+    public DataLogin(String accessToken, String expiresIn, String tokenType, User user) {
         this.accessToken = accessToken;
         this.expiresIn = expiresIn;
         this.tokenType = tokenType;

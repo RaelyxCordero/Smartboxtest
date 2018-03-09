@@ -1,26 +1,15 @@
 package com.smartboxtv.smartboxtest.mvp.models;
 
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import android.provider.Settings;
+import android.util.Log;
 
-import com.smartboxtv.smartboxtest.bdd.LoginModels.App;
-import com.smartboxtv.smartboxtest.bdd.LoginModels.Device;
-import com.smartboxtv.smartboxtest.bdd.LoginModels.LoginBody;
-import com.smartboxtv.smartboxtest.bdd.LoginModels.LoginResponse;
-import com.smartboxtv.smartboxtest.bdd.LoginModels.Profile;
-import com.smartboxtv.smartboxtest.bdd.LoginModels.User;
-import com.smartboxtv.smartboxtest.utils.EventType;
+import com.smartboxtv.smartboxtest.bdd.DataModels.Data;
+import com.smartboxtv.smartboxtest.utils.MessageEventType;
 import com.smartboxtv.smartboxtest.utils.PreferencesManager;
-import com.smartboxtv.smartboxtest.utils.Utils;
 import com.smartboxtv.smartboxtest.webService.ServiceController;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,6 +20,7 @@ import retrofit2.Response;
  */
 
 public class EventModel {
+    public static final String TAG = EventModel.class.getSimpleName();
     Context context;
 
     public EventModel(Context context) {
@@ -39,21 +29,24 @@ public class EventModel {
     }
 
     public void getEvents(int page) {
-//        ServiceController.getEvents(PreferencesManager.getInstance(mContext).getToken(),
-//                page).enqueue(new Callback<DataEvents>() {
-//            @Override
-//            public void onResponse(Call<DataEvents> call, Response<DataEvents> response) {
-//                if (response.isSuccessful())
-//                    mListener.successApi(response.body());
-//                else
-//                    mListener.errorApi(response.code());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<DataEvents> call, Throwable t) {
-//                mListener.errorApi(400);
-//            }
-//        });
+        ServiceController.getEvents(PreferencesManager.getInstance(context).getToken(),
+                page).enqueue(new Callback<Data>() {
+            @Override
+            public void onResponse(Call<Data> call, Response<Data> response) {
+                if (response.isSuccessful())
+                    EventBus.getDefault().post(new Object[]{MessageEventType.HEY_PRESENTER_API_GET_EVENTS_SUCCESS, response.body()});
+                else {
+                    EventBus.getDefault().post(new Object[]{MessageEventType.HEY_PRESENTER_API_GET_EVENTS_ERROR, response.code()});
+                    Log.e(TAG, response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Data> call, Throwable t) {
+                EventBus.getDefault().post(new Object[]{MessageEventType.HEY_PRESENTER_API_GET_EVENTS_ERROR, 500});
+                Log.e(TAG, t.getMessage());
+            }
+        });
 
 
     }
@@ -65,7 +58,7 @@ public class EventModel {
         int type = (int) args[0];
 
         switch (type) {
-            case EventType.GET_EVENTS:
+            case MessageEventType.HEY_MODEL_GET_EVENTS:
                 getEvents(0);
                 break;
         }

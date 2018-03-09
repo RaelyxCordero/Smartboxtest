@@ -5,6 +5,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.smartboxtv.smartboxtest.R;
+import com.smartboxtv.smartboxtest.bdd.DataModels.Data;
 import com.smartboxtv.smartboxtest.bdd.LoginModels.LoginBody;
 import com.smartboxtv.smartboxtest.bdd.LoginModels.LoginResponse;
 import com.smartboxtv.smartboxtest.utils.CustomMessage;
@@ -183,10 +184,10 @@ public class ServiceController {
         ApiInterface api = buildAdapterCustomTimeOut(15).create(ApiInterface.class);
         return api.postLogin("Basic "+BASIC, requestLogin);
     }
-//
-//    public static Call<DataEvents> getEvents(String token, int page) {
-//        ApiInterface api = buildAdapterCustomTimeOut(15).create(ApiInterface.class);
-//        return api.getEvents("Bearer "+token, page);
-//    }
+
+    public static Call<Data> getEvents(String token, int page) {
+        ApiInterface api = buildAdapterCustomTimeOut(15).create(ApiInterface.class);
+        return api.getEvents("Bearer "+token, page);
+    }
 
 }

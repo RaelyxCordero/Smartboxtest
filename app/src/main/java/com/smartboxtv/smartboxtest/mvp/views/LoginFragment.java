@@ -11,13 +11,11 @@ import android.widget.TextView;
 import com.github.ybq.android.spinkit.SpinKitView;
 import com.smartboxtv.smartboxtest.R;
 import com.smartboxtv.smartboxtest.mvp.presenters.LoginPresenter;
-import com.smartboxtv.smartboxtest.utils.EventType;
+import com.smartboxtv.smartboxtest.utils.MessageEventType;
 
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 public class LoginFragment extends Fragment {
     public final static String TAG = LoginFragment.class.getSimpleName();
@@ -52,7 +50,7 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-        EventBus.getDefault().post(new Object[]{EventType.LOGIN});
+        EventBus.getDefault().post(new Object[]{MessageEventType.HEY_PRESENTER_DO_LOGIN});
         return view;
     }
 

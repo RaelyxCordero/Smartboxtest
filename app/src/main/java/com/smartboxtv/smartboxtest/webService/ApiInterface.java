@@ -1,5 +1,6 @@
 package com.smartboxtv.smartboxtest.webService;
 
+import com.smartboxtv.smartboxtest.bdd.DataModels.Data;
 import com.smartboxtv.smartboxtest.bdd.LoginModels.LoginBody;
 import com.smartboxtv.smartboxtest.bdd.LoginModels.LoginResponse;
 
@@ -22,9 +23,9 @@ public interface ApiInterface {
     Call<LoginResponse> postLogin(@Header("Authorization") String basic,
                                   @Body LoginBody requestLogin);
 
-//    @GET("/api/1.0/sport/events")
-//    Call<DataEvents> getEvents(@Header("Authorization") String bearer,
-//                               @Query("page") int page);
+    @GET("/api/1.0/sport/events")
+    Call<Data> getEvents(@Header("Authorization") String bearer,
+                         @Query("page") int page);
 
 
 
