@@ -5,6 +5,8 @@ package com.smartboxtv.smartboxtest.utils;
  */
 
 public class MessageEventType {
+
+    public static final int ON_CLICK_DIALOG = 4000;
     ///CALL TO MODELS
     public static final int HEY_MODEL_POST_LOGIN = 1;
     public static final int HEY_MODEL_GET_EVENTS = 2;
@@ -20,4 +22,6 @@ public class MessageEventType {
 
     ///CALL TO VIEWS
     public static final int HEY_VIEW_LAUNCH_EVENTS = 3000;
+    public static final int HEY_VIEW_LAUNCH_EVENT_DETAIL = 3001;
+    public static final int HEY_VIEW_ADD_EVENTS = 3002;
 }

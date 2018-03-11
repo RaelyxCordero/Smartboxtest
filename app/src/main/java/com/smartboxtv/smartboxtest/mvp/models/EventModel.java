@@ -59,7 +59,7 @@ public class EventModel {
 
         switch (type) {
             case MessageEventType.HEY_MODEL_GET_EVENTS:
-                getEvents(0);
+                    getEvents((int) args[1]);
                 break;
         }
     }

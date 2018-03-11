@@ -43,59 +43,47 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         RecyclerView.ViewHolder viewHolder = null;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
 
-        View viewItem = inflater.inflate(R.layout.card_event, parent, false);
-        viewHolder = new EventViewHolder(viewItem);
-
-//        switch (viewType) {
-//            case ITEM:
-//                View viewItem = inflater.inflate(R.layout.card_event, parent, false);
-//                viewHolder = new EventViewHolder(viewItem);
-//                break;
-//            case LOADING:
-//                View viewLoading = inflater.inflate(R.layout.card_progress, parent, false);
-//                viewHolder = new LoadingVH(viewLoading);
-//                break;
-//        }
+        switch (viewType) {
+            case ITEM:
+                View viewItem = inflater.inflate(R.layout.card_event, parent, false);
+                viewHolder = new EventViewHolder(viewItem);
+                break;
+            case LOADING:
+                View viewLoading = inflater.inflate(R.layout.card_progress, parent, false);
+                viewHolder = new LoadingVH(viewLoading);
+                break;
+        }
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder mHolder, int position) {
-//        if (getItemViewType(position) == ITEM) {
-        Item item = listItem.get(position);
+        if (getItemViewType(position) == ITEM) {
+            Item item = listItem.get(position);
+            final EventViewHolder holder = (EventViewHolder) mHolder;
+            if (item != null){
+                holder.setItem(getItem(position));
 
+                if (item.getHomeTeam() != null && item.getAwayTeam() != null){
+//                if (!item.getHomeTeam().getShortName().equals(""))
+                    holder.ivFirstteam.setImageResource(Utils.getImageResource(item.getHomeTeam().getShortName()));
 
-        final EventViewHolder holder = (EventViewHolder) mHolder;
+//                if (!item.getAwayTeam().getShortName().equals(""))
+                    holder.ivSecondTeam.setImageResource(Utils.getImageResource(item.getAwayTeam().getShortName()));
 
-        if (!item.getHomeTeam().getShortName().equals(""))
-            holder.ivFirstteam.setImageResource(Utils.getImageResource(item.getHomeTeam().getShortName()));
+//                if (!item.getHomeTeam().getName().equals(""))
+                    holder.tvFirstteam.setText(item.getHomeTeam().getName());
 
-        if (!item.getAwayTeam().getShortName().equals(""))
-            holder.ivSecondTeam.setImageResource(Utils.getImageResource(item.getAwayTeam().getShortName()));
+//                if (!item.getAwayTeam().getName().equals(""))
+                    holder.tvSecondTeam.setText(item.getAwayTeam().getName());
 
-        if (!item.getHomeTeam().getName().equals(""))
-            holder.tvFirstteam.setText(item.getHomeTeam().getName());
+                    holder.tvFirstScore.setText(String.valueOf(item.getHomeScore()));
+                    holder.tvSecondscore.setText(String.valueOf(item.getAwayScore()));
+                    holder.tvDate.setText(Utils.changeDate(item.getStartDate()));
+                }
+            }
 
-        if (!item.getAwayTeam().getName().equals(""))
-            holder.tvSecondTeam.setText(item.getAwayTeam().getName());
-
-        if (!item.getMatchDay().getPhase().getOriginal().equals(""))
-            holder.tvPhase.setText(item.getMatchDay().getPhase().getOriginal());
-
-        if (item.getMatchDay().getNameMatchDay() != null)
-            holder.tvNameGroup.setText(item.getMatchDay().getNameMatchDay().getOriginal());
-
-        if (!item.getEventStatus().getName().getEs().equals(""))
-            holder.tvStatus.setText(item.getEventStatus().getName().getEs());
-
-        if (!item.getLocation().getOriginal().equals(""))
-            holder.tvEstadium.setText(item.getLocation().getOriginal());
-
-        holder.tvFirstScore.setText(String.valueOf(item.getHomeScore()));
-        holder.tvSecondscore.setText(String.valueOf(item.getAwayScore()));
-        holder.tvDuration.setText(String.valueOf(item.getMatchTime() / 60 + " Minutos"));
-        holder.tvDate.setText(Utils.changeDate(item.getStartDate()));
-//        }
+        }
 
     }
 
@@ -115,9 +103,9 @@ public class EventsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         notifyItemInserted(listItem.size() - 1);
     }
 
-    public void addAll(List<Item> moveResults) {
+    public void addAll(List<Item> moreEvents) {
         removeLoadingFooter();
-        for (Item result : moveResults) {
+        for (Item result : moreEvents) {
             add(result);
         }
     }

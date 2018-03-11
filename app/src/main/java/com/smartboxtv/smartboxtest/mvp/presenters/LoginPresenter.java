@@ -22,7 +22,7 @@ public class LoginPresenter {
     public LoginPresenter(Context context) {
         this.context = context;
         loginModel = new LoginModel(context);
-        eventModel = new EventModel(context);
+//        eventModel = new EventModel(context);
         EventBus.getDefault().register(this);
     }
 
@@ -41,7 +41,7 @@ public class LoginPresenter {
                 ServiceController.handlerRequestError(context, errorCode);
                 break;
             case MessageEventType.HEY_PRESENTER_API_LOGIN_SUCCESS:
-                EventBus.getDefault().post(new Object[]{MessageEventType.HEY_PRESENTER_GET_EVENTS});
+                EventBus.getDefault().post(new Object[]{MessageEventType.HEY_PRESENTER_GET_EVENTS, 0});
                 break;
 
 

@@ -8,9 +8,13 @@
     card_view:cardElevation="@dimen/cardview_default_elevation"
     card_view:cardCornerRadius="@dimen/cardview_default_radius">
 
-    <ProgressBar
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center" />
+    <com.github.ybq.android.spinkit.SpinKitView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/spin_kit"
+    style="@style/SpinKitView.Large.Wave"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    app:SpinKit_Color="@color/colorAccent" />
 
 </android.support.v7.widget.CardView>

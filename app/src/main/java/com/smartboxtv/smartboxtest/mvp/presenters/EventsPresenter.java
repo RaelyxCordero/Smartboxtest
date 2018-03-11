@@ -33,15 +33,20 @@ public class EventsPresenter {
         switch (type) {
 
             case MessageEventType.HEY_PRESENTER_GET_EVENTS:
-                EventBus.getDefault().post(new Object[]{MessageEventType.HEY_MODEL_GET_EVENTS});
+                EventBus.getDefault().post(new Object[]{MessageEventType.HEY_MODEL_GET_EVENTS,
+                                            (int) args[1]});
                 break;
+
             case MessageEventType.HEY_PRESENTER_API_GET_EVENTS_ERROR:
                 int errorCode = (int) args[1];
                 ServiceController.handlerRequestError(context, errorCode);
                 break;
             case MessageEventType.HEY_PRESENTER_API_GET_EVENTS_SUCCESS:
                 EventResponse data = (EventResponse) args[1];
-                EventBus.getDefault().post(new Object[]{MessageEventType.HEY_VIEW_LAUNCH_EVENTS, data});
+                if (data.getData().getPagination().getPage() == 1)
+                    EventBus.getDefault().post(new Object[]{MessageEventType.HEY_VIEW_LAUNCH_EVENTS, data});
+                else
+                    EventBus.getDefault().post(new Object[]{MessageEventType.HEY_VIEW_ADD_EVENTS, data});
                 break;
         }
     }

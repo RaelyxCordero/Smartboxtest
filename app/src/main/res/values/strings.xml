@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SmartboxTVChallenge</string>
+    <string name="app_name">SmartboxTV Rae App</string>
 
     <!-- TITLE DIALOGS -->
     <string name="error">Error</string>
@@ -11,7 +11,7 @@
     <string name="unauthorized">No autorizado</string>
     <string name="success">Exitoso</string>
     <string name="question">¿Estás seguro?</string>
-    <string name="add_observation">Agregar observacion</string>
+    <string name="add_observation">Agregar observación</string>
     <string name="loading">Cargando</string>
 
     <!-- MESSAGES ERROR-->
@@ -22,16 +22,13 @@
     <string name="unauthorized_user">Lo sentimos, pero no está autorizado para ejecutar esta acción.\n\nIntente iniciar sesión nuevamente</string>
     <string name="login_error">Usuario o contraseña inválida</string>
     <string name="msg_error_no_response">Error en el servidor. Comunicación fallida</string>
-    <string name="please_event">Estamos cargando sus eventos</string>
 
     <!-- GENERAL -->
     <string name="accept">Aceptar</string>
     <string name="card_tv_estadio">Estadio:</string>
-    <string name="card_tv_duracion">Duracion del partido:</string>
+    <string name="card_tv_duracion">Duración del Partido:</string>
     <string name="finalizado">Finalizado</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="hyphen">&#160;-&#160;</string>
 
 </resources>

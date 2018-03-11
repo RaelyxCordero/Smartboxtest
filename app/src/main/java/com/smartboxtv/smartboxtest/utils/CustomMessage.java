@@ -1,9 +1,13 @@
 package com.smartboxtv.smartboxtest.utils;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.smartboxtv.smartboxtest.R;
+
+import org.greenrobot.eventbus.EventBus;
 
 
 /**
@@ -26,7 +30,7 @@ public class CustomMessage {
     public static final int TYPE_EDITTEXT_IP = 11;
 
 
-    public static MaterialDialog.Builder get(Context context, int type, String message) {
+    public static MaterialDialog.Builder get(final Context context, int type, String message) {
         MaterialDialog.Builder dialog = null;
 
         if (context == null) {
@@ -38,6 +42,10 @@ public class CustomMessage {
                 dialog = new MaterialDialog.Builder(context)
                         .title(R.string.error)
                         .iconRes(R.drawable.ic_error)
+                        .titleColorRes(R.color.colorPrimaryDark)
+                        .contentColor(context.getResources().getColor(R.color.colorText))
+                        .positiveColorRes(android.R.color.white)
+                        .backgroundColorRes(R.color.colorPrimaryDark)
                         .maxIconSizeRes(R.dimen.dialog_max_icon_size)
                         .content(message)
                         .positiveText(R.string.accept);
@@ -47,6 +55,10 @@ public class CustomMessage {
                 dialog = new MaterialDialog.Builder(context)
                         .title(R.string.information)
                         .iconRes(R.drawable.ic_information)
+                        .titleColorRes(R.color.colorPrimaryDark)
+                        .contentColor(context.getResources().getColor(R.color.colorText))
+                        .positiveColorRes(android.R.color.white)
+                        .backgroundColorRes(R.color.colorPrimaryDark)
                         .maxIconSizeRes(R.dimen.dialog_max_icon_size)
                         .content(message)
                         .positiveText(R.string.accept);
@@ -56,6 +68,10 @@ public class CustomMessage {
                 dialog = new MaterialDialog.Builder(context)
                         .title(R.string.warning)
                         .iconRes(R.drawable.ic_warning)
+                        .titleColorRes(R.color.colorPrimaryDark)
+                        .contentColor(context.getResources().getColor(R.color.colorText))
+                        .positiveColorRes(android.R.color.white)
+                        .backgroundColorRes(R.color.colorPrimaryDark)
                         .maxIconSizeRes(R.dimen.dialog_max_icon_size)
                         .content(message)
                         .positiveText(R.string.accept);
@@ -65,6 +81,10 @@ public class CustomMessage {
                 dialog = new MaterialDialog.Builder(context)
                         .title(R.string.problems)
                         .iconRes(R.drawable.ic_problems)
+                        .titleColorRes(R.color.colorPrimaryDark)
+                        .contentColor(context.getResources().getColor(R.color.colorText))
+                        .positiveColorRes(android.R.color.white)
+                        .backgroundColorRes(R.color.colorPrimaryDark)
                         .maxIconSizeRes(R.dimen.dialog_max_icon_size)
                         .content(message)
                         .positiveText(R.string.accept);
@@ -74,6 +94,10 @@ public class CustomMessage {
                 dialog = new MaterialDialog.Builder(context)
                         .title(R.string.warning)
                         .iconRes(R.drawable.ic_warning)
+                        .titleColorRes(R.color.colorPrimaryDark)
+                        .contentColor(context.getResources().getColor(R.color.colorText))
+                        .positiveColorRes(android.R.color.white)
+                        .backgroundColorRes(R.color.colorPrimaryDark)
                         .maxIconSizeRes(R.dimen.dialog_max_icon_size)
                         .content(message)
                         .positiveText(R.string.accept)
@@ -84,6 +108,10 @@ public class CustomMessage {
                 dialog = new MaterialDialog.Builder(context)
                         .title(R.string.error)
                         .iconRes(R.drawable.ic_no_such_user)
+                        .titleColorRes(R.color.colorPrimaryDark)
+                        .contentColor(context.getResources().getColor(R.color.colorText))
+                        .positiveColorRes(android.R.color.white)
+                        .backgroundColorRes(R.color.colorPrimaryDark)
                         .maxIconSizeRes(R.dimen.dialog_max_icon_size)
                         .content(message)
                         .positiveText(R.string.accept);
@@ -102,6 +130,10 @@ public class CustomMessage {
                 dialog = new MaterialDialog.Builder(context)
                         .title(R.string.unauthorized)
                         .iconRes(R.drawable.ic_prohibition)
+                        .titleColorRes(R.color.colorPrimaryDark)
+                        .contentColor(context.getResources().getColor(R.color.colorText))
+                        .positiveColorRes(android.R.color.white)
+                        .backgroundColorRes(R.color.colorPrimaryDark)
                         .maxIconSizeRes(R.dimen.dialog_max_icon_size)
                         .content(message)
                         .positiveText(R.string.accept);
@@ -110,6 +142,10 @@ public class CustomMessage {
                 dialog = new MaterialDialog.Builder(context)
                         .title(R.string.question)
                         .iconRes(R.drawable.ic_question)
+                        .titleColorRes(R.color.colorPrimaryDark)
+                        .contentColor(context.getResources().getColor(R.color.colorText))
+                        .positiveColorRes(android.R.color.white)
+                        .backgroundColorRes(R.color.colorPrimaryDark)
                         .maxIconSizeRes(R.dimen.dialog_max_icon_size)
                         .content(message)
                         .positiveText(R.string.accept)
@@ -117,8 +153,12 @@ public class CustomMessage {
                 break;
 
         }
-
-
+        dialog.onPositive(new MaterialDialog.SingleButtonCallback() {
+            @Override
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                EventBus.getDefault().post(new Object[]{MessageEventType.ON_CLICK_DIALOG});
+            }
+        });
         return dialog;
     }
 }

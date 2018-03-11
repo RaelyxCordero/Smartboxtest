@@ -8,6 +8,7 @@ import com.smartboxtv.smartboxtest.bdd.DataModels.EventResponse;
 import com.smartboxtv.smartboxtest.bdd.LoginModels.LoginBody;
 import com.smartboxtv.smartboxtest.bdd.LoginModels.LoginResponse;
 import com.smartboxtv.smartboxtest.utils.CustomMessage;
+import com.smartboxtv.smartboxtest.utils.PreferencesManager;
 import com.smartboxtv.smartboxtest.utils.Utils;
 
 import java.util.HashMap;
@@ -112,6 +113,7 @@ public class ServiceController {
 
         switch (code) {
             case ServiceController.CODE_401_CLIENT_ERROR:
+                PreferencesManager.getInstance(context).setToken("");
                 CustomMessage.get(context,
                         CustomMessage.TYPE_UNAUTHORIZED,
                         context.getResources().getString(R.string.unauthorized_user))

@@ -10,34 +10,35 @@ public class Pagination implements Serializable
 
     @SerializedName("page")
     @Expose
-    private long page;
+    private int page;
     @SerializedName("first")
     @Expose
-    private long first;
+    private int first;
     @SerializedName("items")
     @Expose
-    private long items;
+    private int items;
     @SerializedName("last")
     @Expose
-    private long last;
+    private int last;
     @SerializedName("next")
     @Expose
-    private long next;
+    private int next;
     @SerializedName("pages")
     @Expose
-    private long pages;
+    private int pages;
     @SerializedName("offset")
     @Expose
-    private long offset;
+    private int offset;
     @SerializedName("totalItems")
     @Expose
-    private long totalItems;
+    private int totalItems;
 
     public Pagination() {
     }
 
 
-    public Pagination(long page, long first, long items, long last, long next, long pages, long offset, long totalItems) {
+    public Pagination(int page, int first, int items, int last, int next, int pages,
+                      int offset, int totalItems) {
         super();
         this.page = page;
         this.first = first;
@@ -49,67 +50,67 @@ public class Pagination implements Serializable
         this.totalItems = totalItems;
     }
 
-    public long getPage() {
+    public int getPage() {
         return page;
     }
 
-    public void setPage(long page) {
+    public void setPage(int page) {
         this.page = page;
     }
 
-    public long getFirst() {
+    public int getFirst() {
         return first;
     }
 
-    public void setFirst(long first) {
+    public void setFirst(int first) {
         this.first = first;
     }
 
-    public long getItems() {
+    public int getItems() {
         return items;
     }
 
-    public void setItems(long items) {
+    public void setItems(int items) {
         this.items = items;
     }
 
-    public long getLast() {
+    public int getLast() {
         return last;
     }
 
-    public void setLast(long last) {
+    public void setLast(int last) {
         this.last = last;
     }
 
-    public long getNext() {
+    public int getNext() {
         return next;
     }
 
-    public void setNext(long next) {
+    public void setNext(int next) {
         this.next = next;
     }
 
-    public long getPages() {
+    public int getPages() {
         return pages;
     }
 
-    public void setPages(long pages) {
+    public void setPages(int pages) {
         this.pages = pages;
     }
 
-    public long getOffset() {
+    public int getOffset() {
         return offset;
     }
 
-    public void setOffset(long offset) {
+    public void setOffset(int offset) {
         this.offset = offset;
     }
 
-    public long getTotalItems() {
+    public int getTotalItems() {
         return totalItems;
     }
 
-    public void setTotalItems(long totalItems) {
+    public void setTotalItems(int totalItems) {
         this.totalItems = totalItems;
     }
 

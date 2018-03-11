@@ -3,6 +3,7 @@ package com.smartboxtv.smartboxtest.mvp.views;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
 
@@ -25,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout fragmentsContainer;
     EventsPresenter eventsPresenter;
 
-    private PreferencesManager mPreferences;
     private static FragmentManager fm;
 
     @Override
@@ -36,9 +36,7 @@ public class MainActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
 
         fm = getSupportFragmentManager();
-        mPreferences = PreferencesManager.getInstance(this);
         eventsPresenter = new EventsPresenter(this);
-
         replaceFragment(Utils.LOGIN, null);
     }
 
@@ -72,7 +70,21 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(Utils.EVENTS, data);
                 break;
 
+            case MessageEventType.HEY_VIEW_LAUNCH_EVENT_DETAIL:
+                String phase = (String) args[1];
+                String nameGroup = (String) args[2];
+                String status = (String) args[3];
+                String duration = (String) args[4];
+                String estadium = (String) args[5];
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.add(DetailDialog.newInstance(phase, nameGroup,status, duration, estadium),
+                        DetailDialog.TAG);
+                ft.commitAllowingStateLoss();
+                break;
 
+            case MessageEventType.ON_CLICK_DIALOG:
+                onBackPressed();
+                break;
         }
     }
 

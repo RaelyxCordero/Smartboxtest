@@ -12,6 +12,8 @@ import com.github.ybq.android.spinkit.SpinKitView;
 import com.smartboxtv.smartboxtest.R;
 import com.smartboxtv.smartboxtest.mvp.presenters.LoginPresenter;
 import com.smartboxtv.smartboxtest.utils.MessageEventType;
+import com.smartboxtv.smartboxtest.utils.PreferencesManager;
+import com.smartboxtv.smartboxtest.utils.Utils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -50,10 +52,19 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-        EventBus.getDefault().post(new Object[]{MessageEventType.HEY_PRESENTER_DO_LOGIN});
+
+
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (PreferencesManager.getInstance(getContext()).getToken().equals(""))
+            EventBus.getDefault().post(new Object[]{MessageEventType.HEY_PRESENTER_DO_LOGIN});
+        else
+            EventBus.getDefault().post(new Object[]{MessageEventType.HEY_PRESENTER_GET_EVENTS, 0});
+    }
 
     @Override
     public void onAttach(Context context) {

@@ -28,6 +28,7 @@ public class Utils {
 
     public static final int LOGIN = 0;
     public static final int EVENTS = 1;
+    public static final int EVENTS_DIALOG = 2;
 
 
     public static Gson getGsonBuilder() {
